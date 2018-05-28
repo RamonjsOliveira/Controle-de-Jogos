@@ -1,0 +1,65 @@
+﻿@using GamesRente.Models
+@model GamesRente.Models.Amigo
+
+@{
+    ViewBag.Title = "Detalhes";
+    List<Emprestimo> emprestimos = ViewBag.Emprestimos;
+}
+
+<h2>Detalhes do @Model.Nome</h2>
+
+<div>
+    <h4>Amigo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+    </dl>
+</div>
+
+@if (emprestimos != null)
+{
+    <table class="table">
+        <hr />
+        <h4>Histórico de Emprestimos</h4>
+     
+        <tr>
+            <th>@Html.Label("Jogo")</th>
+            <th>@Html.Label("Tipo")</th>
+            <th>@Html.Label("Data do Emprestimo")</th>
+        </tr>
+        @foreach (var item in emprestimos)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Jogo.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Jogo.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datacadastro)
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @Class = "btn btn-warning" })
+    @Html.ActionLink("Voltar", "Index", null, new { @Class = "btn btn-info" })
+</p>

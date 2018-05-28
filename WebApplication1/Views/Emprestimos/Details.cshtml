@@ -1,0 +1,54 @@
+﻿@model GamesRente.Models.Emprestimo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes do Emprestimo</h2>
+
+<div>
+    <h4>Emprestimo do @Model.Jogo.Nome para o @Model.Amigo.Nome</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Amigo.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amigo.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Jogo.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jogo.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Datacadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Datacadastro)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (!Model.Devolvido)
+    {
+        @Html.ActionLink("Devolver", "Devolver", new { id = Model.Id }, new { @Class = "btn btn-primary devolver" })
+    }
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @Class = "btn btn-warning" })
+    @Html.ActionLink("Voltar", "Index", null, new { @Class = "btn btn-info" })
+</p>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    $(".devolver").on('click', function () {
+        event.preventDefault();
+        var url = $(this).attr("href");
+        DevolverJogo(url)
+    });
+</script>

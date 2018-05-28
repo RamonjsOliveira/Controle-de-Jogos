@@ -1,0 +1,48 @@
+﻿@model GamesRente.Models.Emprestimo
+
+@{
+    ViewBag.Title = "Excluir Emprestimo";
+}
+
+<h2>Excluir Emprestimo</h2>
+
+<h3>Tem certeza que quer excluir esse empréstimo?</h3>
+<div>
+    <h4>Emprestimo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AMigo.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AMigo.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Jogo.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jogo.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Datacadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Datacadastro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-danger" /> |
+            @Html.ActionLink("Voltar", "Index", null, new {@Class= "btn btn-info" })
+        </div>
+    }
+</div>

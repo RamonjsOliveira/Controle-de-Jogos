@@ -1,0 +1,58 @@
+﻿@model IEnumerable<GamesRente.Models.Emprestimo>
+
+@{
+    ViewBag.Title = "Emprestimos";
+}
+
+<h2>Emprestimos</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar Emprestimo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AmigoId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JogoId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Datacadastro)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amigo.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jogo.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datacadastro)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @Class = "btn btn-warning" })
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @Class = "btn btn-info" })
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @Class = "btn btn-danger" })
+                @if (!item.Devolvido)
+                {
+                    @Html.ActionLink("Devolver", "Devolver", new { id = item.Id }, new { @Class = "btn btn-primary devolver" });
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    $(".devolver").on('click', function () {
+        event.preventDefault();
+        var url = $(this).attr("href");
+        DevolverJogo(url)
+    });
+</script>

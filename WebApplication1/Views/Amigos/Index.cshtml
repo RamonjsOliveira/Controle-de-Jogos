@@ -1,0 +1,76 @@
+﻿@model IEnumerable<GamesRente.Models.Amigo>
+
+@{
+    ViewBag.Title = "Amigos";
+}
+
+<h2>Amigos</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar Amigo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Liberado)
+        </th>
+      
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCadastro)
+            </td>
+            <td>
+                @if (item.Liberado)
+                {
+                    <span class="glyphicon glyphicon-ok-circle" style="color: green;"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-remove-circle" style="color: red;"></span>
+                }
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @Class = "btn btn-warning" })
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @Class = "btn btn-info" })
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @Class = "btn btn-danger" })
+                @if (item.Liberado)
+                {
+
+                    @Html.ActionLink("Bloquear", "Bloquear", new { id = item.Id }, new { @Class = "btn bloquear", style = "background-color: darkred; color: white; " })
+                }
+                else
+                {
+                    @Html.ActionLink("Liberar", "Liberar", new { id = item.Id }, new { @Class = "btn btn-success liberar" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    $(".bloquear").on('click', function () {
+        event.preventDefault();
+        var url = $(this).attr("href");
+        BloqueiaAmigo(url)
+    });
+    $(".liberar").on('click', function () {
+        event.preventDefault();
+        var url = $(this).attr("href");
+        LiberaAmigo(url)
+    });
+</script>

@@ -1,0 +1,50 @@
+﻿@model GamesRente.Models.Jogo
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes do @Model.Nome</h2>
+
+<div>
+    <h4>Jogo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Liberado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Liberado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id },new { @Class="btn btn-warning"})
+    @Html.ActionLink("Voltar", "Index", null, new { @Class = "btn btn-info" })
+</p>

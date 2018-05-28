@@ -1,0 +1,83 @@
+﻿@using GamesRente.Models;
+@model IEnumerable<GamesRente.Models.Jogo>
+
+@{
+    ViewBag.Title = "Jogos";
+}
+
+<h2>Jogos</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar Jogo", "Create", null, new { @Class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Liberado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCadastro)
+            </td>
+            <td>
+                @if (item.Liberado)
+                {
+                    <span class="glyphicon glyphicon-ok-circle" style="color: green;"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-remove-circle" style="color: red;"></span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @Class = "btn btn-warning" })
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @Class = "btn btn-info" })
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @Class = "btn btn-danger" })
+                @if (!item.Liberado)
+                {
+                    @Html.ActionLink("Devolver", "Devolver", new { id = item.Id }, new { @Class = "btn btn-primary devolver" })
+                }
+                else
+                {
+                    @Html.ActionLink("Emprestar Jogo", "EmprestimoRapido", "Jogos", new { id = item.Id }, new { @Class = "btn btn-primary emprestar" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    $(".devolver").on('click', function () {
+        event.preventDefault();
+        var url = $(this).attr("href");
+        DevolverJogo(url)
+    });
+
+    $(".emprestar").on('click', function () {
+        event.preventDefault();
+        var amigos = {@Html.Raw(ViewBag.Amigos)};
+        var url = $(this).attr("href");
+        Emprestar(url, amigos)
+    });
+</script>

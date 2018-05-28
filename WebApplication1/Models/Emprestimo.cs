@@ -14,6 +14,9 @@ namespace GamesRente.Models
         [Display(Name ="Data do Emprestimo")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Datacadastro { get; set; }
+        [Display(Name = "Data da Devolução")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? DataDevolucao { get; set; }
         public bool Excluido { get; set; }
         public bool Devolvido { get; set; }
         [Display(Name ="Amigo")]

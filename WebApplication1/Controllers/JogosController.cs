@@ -55,6 +55,8 @@ namespace GamesRente.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Emprestimos = db.Emprestimo.Where(x => x.JogoId == id && !x.Excluido).ToList();
             return View(jogo);
         }
 
@@ -75,6 +77,7 @@ namespace GamesRente.Controllers
             {
                 jogo.DataCadastro = DateTime.Now;
                 jogo.Liberado = true;
+                jogo.Excluido = false;
                 db.Jogos.Add(jogo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -103,7 +106,7 @@ namespace GamesRente.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,DataCadastro,Excluido,IdTipo")] Jogo jogo)
+        public ActionResult Edit(Jogo jogo)
         {
             if (ModelState.IsValid)
             {
@@ -136,6 +139,7 @@ namespace GamesRente.Controllers
             jogo.Liberado = true;
             Emprestimo emprestimo = db.Emprestimo.Where(x => x.JogoId == id && !x.Devolvido).FirstOrDefault();
             emprestimo.Devolvido = true;
+            emprestimo.DataDevolucao = DateTime.Now;
             db.Entry(emprestimo).State = EntityState.Modified;
             db.Entry(jogo).State = EntityState.Modified;
             db.SaveChanges();

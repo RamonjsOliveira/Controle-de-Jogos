@@ -1,7 +1,9 @@
-﻿@model GamesRente.Models.Jogo
+﻿@using GamesRente.Models;
+@model GamesRente.Models.Jogo
 
 @{
     ViewBag.Title = "Detalhes";
+    List<Emprestimo> emprestimos = ViewBag.Emprestimos;
 }
 
 <h2>Detalhes do @Model.Nome</h2>
@@ -31,7 +33,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Liberado)
+            @if (Model.Liberado)
+            {
+                <span class="glyphicon glyphicon-ok-circle" style="color: green;"></span>
+            }
+            else
+            {
+                <span class="glyphicon glyphicon-remove-circle" style="color: red;"></span>
+            }
         </dd>
 
         <dt>
@@ -39,12 +48,43 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Tipo)
+            @Html.Raw(Model.Tipo.GetDisplayName())
         </dd>
 
     </dl>
 </div>
+
+@if (emprestimos.Count > 0)
+{
+    <table class="table">
+        <hr />
+        <h4>Histórico de Emprestimos</h4>
+
+        <tr>
+            <th>@Html.Label("Amigo")</th>
+            
+            <th>@Html.Label("Data do Emprestimo")</th>
+            <th>@Html.Label("Data da Devolução")</th>
+        </tr>
+        @foreach (var item in emprestimos)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amigo.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datacadastro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataDevolucao)
+                </td>
+            </tr>
+        }
+    </table>
+}
+
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id },new { @Class="btn btn-warning"})
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @Class = "btn btn-warning" })
     @Html.ActionLink("Voltar", "Index", null, new { @Class = "btn btn-info" })
 </p>

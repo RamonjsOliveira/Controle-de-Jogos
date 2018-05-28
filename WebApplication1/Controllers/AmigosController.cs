@@ -84,7 +84,7 @@ namespace GamesRente.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,DataCadastro,Excluido")] Amigo amigo)
+        public ActionResult Edit(Amigo amigo)
         {
             if (ModelState.IsValid)
             {

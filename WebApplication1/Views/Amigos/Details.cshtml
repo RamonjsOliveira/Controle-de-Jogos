@@ -30,7 +30,7 @@
     </dl>
 </div>
 
-@if (emprestimos != null)
+@if (emprestimos.Count > 0)
 {
     <table class="table">
         <hr />
@@ -40,6 +40,7 @@
             <th>@Html.Label("Jogo")</th>
             <th>@Html.Label("Tipo")</th>
             <th>@Html.Label("Data do Emprestimo")</th>
+            <th>@Html.Label("Data da Devolução")</th>
         </tr>
         @foreach (var item in emprestimos)
         {
@@ -53,6 +54,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Datacadastro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataDevolucao)
                 </td>
             </tr>
         }

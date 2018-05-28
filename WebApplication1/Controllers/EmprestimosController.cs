@@ -57,6 +57,7 @@ namespace GamesRente.Controllers
                 Jogo jogo = db.Jogos.Find(emprestimo.JogoId);
                 jogo.Liberado = false;
                 emprestimo.Devolvido = false;
+                emprestimo.Datacadastro = DateTime.Now;
                 db.Emprestimo.Add(emprestimo);
                 db.Entry(jogo).State = EntityState.Modified;
                 db.SaveChanges();
@@ -134,6 +135,7 @@ namespace GamesRente.Controllers
         {
             Emprestimo emprestimo = db.Emprestimo.Find(id);
             emprestimo.Devolvido = true;
+            emprestimo.DataDevolucao = DateTime.Now;
             Jogo jogo = db.Jogos.Find(emprestimo.JogoId);
             jogo.Liberado = true;
             db.Entry(emprestimo).State = EntityState.Modified;

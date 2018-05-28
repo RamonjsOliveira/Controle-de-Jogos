@@ -220,10 +220,19 @@
     <Compile Include="Migrations\201805280555529_emprestimoDevolvido.Designer.cs">
       <DependentUpon>201805280555529_emprestimoDevolvido.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805280948552_dataDevolucao.cs" />
+    <Compile Include="Migrations\201805280948552_dataDevolucao.Designer.cs">
+      <DependentUpon>201805280948552_dataDevolucao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805281003179_dataDevolucaoNullable.cs" />
+    <Compile Include="Migrations\201805281003179_dataDevolucaoNullable.Designer.cs">
+      <DependentUpon>201805281003179_dataDevolucaoNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Amigo.cs" />
     <Compile Include="Models\Emprestimo.cs" />
+    <Compile Include="Models\EnumExtensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Jogo.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -343,6 +352,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805280555529_emprestimoDevolvido.resx">
       <DependentUpon>201805280555529_emprestimoDevolvido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805280948552_dataDevolucao.resx">
+      <DependentUpon>201805280948552_dataDevolucao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805281003179_dataDevolucaoNullable.resx">
+      <DependentUpon>201805281003179_dataDevolucaoNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

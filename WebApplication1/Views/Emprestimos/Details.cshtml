@@ -33,6 +33,15 @@
         <dd>
             @Html.DisplayFor(model => model.Datacadastro)
         </dd>
+        @if(Model.DataDevolucao != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.DataDevolucao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DataDevolucao)
+            </dd>
+        }
 
     </dl>
 </div>

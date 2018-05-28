@@ -174,7 +174,8 @@ namespace GamesRente.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Jogo jogo = db.Jogos.Find(id);
-            db.Jogos.Remove(jogo);
+            jogo.Excluido = true;
+            db.Entry(jogo).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

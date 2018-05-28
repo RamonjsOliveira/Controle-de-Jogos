@@ -125,7 +125,8 @@ namespace GamesRente.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Emprestimo emprestimo = db.Emprestimo.Find(id);
-            db.Emprestimo.Remove(emprestimo);
+            emprestimo.Excluido = true;
+            db.Entry(emprestimo).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

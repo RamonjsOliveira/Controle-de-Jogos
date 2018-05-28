@@ -20,25 +20,25 @@ namespace GamesRente.Controllers
         public ActionResult Index()
         {
             var amigos = db.Amigo.Where(x => !x.Excluido && x.Liberado).Select(x => new {x.Id, x.Nome }).ToList();
-            var lista = JsonConvert.SerializeObject(amigos, Formatting.Indented);
-            var listas = string.Empty;
+            
+            var listaAmigos = string.Empty;
             var count = 0;
             foreach (var item in amigos)
             {
                 if(count == amigos.Count)
                 {
-                    listas += (string.Format("'{0}':'{1}'", item.Id, item.Nome));
+                    listaAmigos += (string.Format("'{0}':'{1}'", item.Id, item.Nome));
                 }else if (count == 0)
                 {
-                    listas += (string.Format("'{0}':'{1}'", item.Id, item.Nome));
+                    listaAmigos += (string.Format("'{0}':'{1}'", item.Id, item.Nome));
                 }
                 else
                 {
-                    listas += (string.Format(",'{0}':'{1}'", item.Id, item.Nome));
+                    listaAmigos += (string.Format(",'{0}':'{1}'", item.Id, item.Nome));
                 }
                 count++;
             }
-            ViewBag.Amigos = listas;
+            ViewBag.Amigos = listaAmigos;
             
             return View(db.Jogos.Where(x=> !x.Excluido).ToList());
         }

@@ -18,7 +18,7 @@ namespace GamesRente.Controllers
         // GET: Emprestimos
         public ActionResult Index()
         {
-            var emprestimo = db.Emprestimo.Include(e => e.Amigo).Include(e => e.Jogo);
+            var emprestimo = db.Emprestimo.Include(e => e.Amigo).Include(e => e.Jogo).Where(x=> !x.Excluido);
             return View(emprestimo.ToList());
         }
         

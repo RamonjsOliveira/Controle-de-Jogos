@@ -7,7 +7,7 @@
 <h2>Emprestimos</h2>
 
 <p>
-    @Html.ActionLink("Cadastrar Emprestimo", "Create", null, new {@Class= "btn btn-success" })
+    @Html.ActionLink("Cadastrar Emprestimo", "Create", null, new { @Class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -20,7 +20,14 @@
         <th>
             @Html.DisplayNameFor(model => model.Datacadastro)
         </th>
-        <th></th>
+
+        @if (Model.Any(x => x.DataDevolucao != null))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.DataDevolucao);
+            </th>
+        }
+
     </tr>
 
     @foreach (var item in Model)
@@ -35,7 +42,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Datacadastro)
             </td>
-            <td>
+            @if (item.DataDevolucao != null)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataDevolucao)
+                </td>
+            }
+            else
+            {
+                <td>-</td>
+            }<td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @Class = "btn btn-warning" })
                 @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @Class = "btn btn-info" })
                 @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @Class = "btn btn-danger" })
